@@ -6,11 +6,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppInitializer extends Application {
 
     public static void main(String[] args) {
+
         launch(args);
     }
 

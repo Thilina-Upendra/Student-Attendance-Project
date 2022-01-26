@@ -24,6 +24,10 @@ public class ImportDBFormController {
 
     public void initialize(){
         txtBrowse.setEditable(false);
+        rdoRestore.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            btnOkay.setDisable(txtBrowse.getText().isEmpty() && newValue);
+        });
+
     }
 
     public void initFileProperty(SimpleObjectProperty<File> propertyFile){
@@ -39,6 +43,7 @@ public class ImportDBFormController {
         File file = fileChooser.showOpenDialog(btnOkay.getScene().getWindow());
         txtBrowse.setText(file != null ? file.getAbsolutePath() : "");
         fileProperty.setValue(file);
+        System.out.println(fileProperty.getValue());
     }
 
     public void btnOkayOnAction(ActionEvent actionEvent) {

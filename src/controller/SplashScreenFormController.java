@@ -19,12 +19,14 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class SplashScreenFormController {
 
     public ProgressBar pgb;
     public Label lblStatus;
     private File file;   //Backup file to restore
+    SimpleObjectProperty<File> fileProperty = new SimpleObjectProperty<>();
 
     private SimpleStringProperty status = new SimpleStringProperty("Initializing...");
     private SimpleDoubleProperty progress = new SimpleDoubleProperty(0.0);
@@ -67,23 +69,27 @@ public class SplashScreenFormController {
 
         try {
 
-            SimpleObjectProperty<File> fileProperty = new SimpleObjectProperty<>(file);
-
-
             Stage stage = new Stage();
-            AnchorPane root = FXMLLoader.load(this.getClass().getResource("../view/ImportDBForm.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/ImportDBForm.fxml"));
+            AnchorPane root = fxmlLoader.load();
+            ImportDBFormController controller = fxmlLoader.getController();
+            controller.initFileProperty(fileProperty);
+
+            //AnchorPane root = FXMLLoader.load(this.getClass().getResource("../view/ImportDBForm.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.sizeToScene();
             stage.setTitle("Student Attendance: Sign In");
             stage.setResizable(false);
+
+            /*On the Splash screen, and it should be base on the splash screen*/
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(lblStatus.getScene().getWindow());
+            /*-------------------------------------------------*/
             stage.centerOnScreen();
             stage.showAndWait();
-            file = fileProperty.getValue();
 
-            if(file == null){
+            if(fileProperty.getValue() == null){
                 /*Create the database*/
                 updateProgress("Creating a new DB..",0.2);
 
@@ -99,19 +105,42 @@ public class SplashScreenFormController {
                         /*Read the sql script file*/
                         InputStream inputStream = this.getClass().getResourceAsStream("/assets/dbScript.sql");
                         byte[] buffer = new byte[inputStream.available()];
+                        sleep(1000);
+
+
                         inputStream.read(buffer);
                         String script = new String(buffer);
 
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306?allowMultiQueries=true", "root", "mysql");
+
+                        Platform.runLater(() -> {
+                            updateProgress("Execute database Script..",0.5);
+                        });
+
+                        Statement stm = connection.createStatement();
+                        stm.execute(script);
+                        connection.close();
+                        sleep(1000);
+
+                        Platform.runLater(() -> {
+                            updateProgress("Obtaining a new Database connection..",0.7);
+                        });
+                        connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/dep8_student_attendance", "root", "mysql");
 
 
-                    } catch (IOException e) {
+                        Platform.runLater(() -> {
+                            updateProgress("Setting up UI",0.8);
+                        });
+                    } catch (IOException | SQLException e) {
                         e.printStackTrace();
                     }
 
 
                 }).start();
             }else{
+
                 /*Store the database*/
+                System.out.println("Restoring....");
             }
 
         } catch (IOException e) {
