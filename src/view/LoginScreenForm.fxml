@@ -24,8 +24,8 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="166.0" layoutY="118.0" prefHeight="26.0" prefWidth="303.0" />
-      <TextField layoutX="166.0" layoutY="163.0" prefHeight="26.0" prefWidth="303.0" />
+      <TextField fx:id="txtEnteredUserName" layoutX="166.0" layoutY="118.0" prefHeight="26.0" prefWidth="303.0" />
+      <TextField fx:id="txtEnteredPassword" layoutX="166.0" layoutY="163.0" prefHeight="26.0" prefWidth="303.0" />
       <Label layoutX="131.0" layoutY="14.0" prefHeight="26.0" prefWidth="370.0" text="Welcome to Student Attendance System">
          <font>
             <Font name="System Bold" size="16.0" />

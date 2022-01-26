@@ -10,8 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="307.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewReportFormController">
+<AnchorPane prefHeight="307.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AlertFormController">
    <children>
       <Label layoutX="156.0" layoutY="24.0" text="ALERT !!!" textFill="#eb0808">
          <font>
@@ -31,17 +30,17 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="ID : 2021/DEP08/I001">
+            <Label fx:id="lblId" text="ID : 2021/DEP08/I001">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Name : Thilina Upendra">
+            <Label fx:id="lblName" text="Name : Thilina Upendra">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="2022-01-20 12.15 AM IN">
+            <Label fx:id="lblDate" text="2022-01-20 12.15 AM IN">
                <font>
                   <Font size="14.0" />
                </font>

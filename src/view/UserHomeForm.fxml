@@ -12,22 +12,22 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="148.0" layoutY="65.0" mnemonicParsing="false" text="Record Attendance">
+      <Button fx:id="btnRecordAttendance" layoutX="148.0" layoutY="65.0" mnemonicParsing="false" text="Record Attendance">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="148.0" layoutY="114.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="155.0" text="View Reports">
+      <Button fx:id="btnViewReports" layoutX="148.0" layoutY="114.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="155.0" text="View Reports">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="148.0" layoutY="165.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="155.0" text="User Profile">
+      <Button fx:id="btnUserProfile" layoutX="148.0" layoutY="165.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="155.0" text="User Profile">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="148.0" layoutY="211.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="155.0" text="Sign Out">
+      <Button fx:id="btnSignOut" layoutX="148.0" layoutY="211.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="155.0" text="Sign Out">
          <font>
             <Font size="14.0" />
          </font>
