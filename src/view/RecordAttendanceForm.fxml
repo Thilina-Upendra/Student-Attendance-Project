@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.RecordAttendanceForm"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="326.0" prefWidth="555.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RecordAttendanceForm">
+   <children>
+      <Label layoutX="158.0" layoutY="14.0" text="Record Attendance">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="56.0" text="Student ID :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="88.0" text="Student Name :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="16.0" layoutY="166.0" text="Last Record">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="144.0" layoutY="53.0" prefHeight="26.0" prefWidth="220.0" />
+      <TextField layoutX="144.0" layoutY="85.0" prefHeight="26.0" prefWidth="220.0" />
+      <Button layoutX="148.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #2c3e50;" text="IN" textFill="WHITE" />
+      <Button layoutX="258.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #2c3e50;" text="OUT" textFill="WHITE" />
+      <ImageView fitHeight="159.0" fitWidth="141.0" layoutX="388.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/student.jpeg" />
+         </image></ImageView>
+      <TextArea layoutX="144.0" layoutY="166.0" prefHeight="153.0" prefWidth="220.0" promptText="All the detials of last Entry" />
+   </children>
 </AnchorPane>

@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.LoginScreenFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="229.0" prefWidth="508.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginScreenFormController">
+   <children>
+      <ImageView fitHeight="85.0" fitWidth="106.0" layoutX="33.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/user.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="39.0" layoutY="120.0" text="User Name :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="165.0" prefHeight="21.0" prefWidth="106.0" text="Password :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="166.0" layoutY="118.0" prefHeight="26.0" prefWidth="303.0" />
+      <TextField layoutX="166.0" layoutY="163.0" prefHeight="26.0" prefWidth="303.0" />
+      <Label layoutX="131.0" layoutY="14.0" prefHeight="26.0" prefWidth="370.0" text="Welcome to Student Attendance System">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="156.0" layoutY="48.0" text="Please enter your Login Credentials to log in">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

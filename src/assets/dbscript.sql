@@ -18,5 +18,8 @@ CREATE TABLE IF NOT EXISTS attendance(
 
 
 CREATE TABLE IF NOT EXISTS user(
-    user_name VARCHAR(30)
+    user_name VARCHAR(30) PRIMARY KEY ,
+    password VARCHAR(50) NOT NULL ,
+    name VARCHAR(100) NOT NULL ,
+    rate ENUM ('admin_user','normal_user') NOT NULL
 );

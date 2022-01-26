@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.SplashScreenFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="348.0" prefWidth="459.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SplashScreenFormController">
+   <children>
+      <ProgressBar fx:id="pgb" layoutX="114.0" layoutY="280.0" prefHeight="20.0" prefWidth="232.0" progress="0.0" />
+      <Label fx:id="lblStatus" alignment="CENTER" layoutX="114.0" layoutY="248.0" prefHeight="16.0" prefWidth="232.0" text="Splash description">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="174.0" fitWidth="232.0" layoutX="114.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/splash.gif" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>
