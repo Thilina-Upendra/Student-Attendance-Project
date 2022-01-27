@@ -1,5 +1,6 @@
 package controller;
 
+import db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,7 +16,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -49,7 +49,12 @@ public class SplashScreenFormController {
 
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/dep008_hello", "root", "mysql");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/dep8_student_attendance", "root", "mysql");
+
+                /*If we get the connection successfully load the login form*/
+                Platform.runLater(()->{
+                    loadLoginForm(connection);
+                });
 
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -58,11 +63,32 @@ public class SplashScreenFormController {
                     Platform.runLater(this::loadImportDBForm);
                 }
                 /*e.printStackTrace();*/
-
-
             }
 
         }).start();
+    }
+
+    private void loadLoginForm(Connection connection) {
+
+
+
+        try {
+            Stage stage = new Stage();
+            AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/LoginScreenForm.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Student Attendance System: Create Admin");
+            stage.setResizable(false);
+            stage.centerOnScreen();
+            stage.sizeToScene();
+            stage.show();
+
+            /* Let's close the splash screen eventually */
+            ((Stage)(lblStatus.getScene().getWindow())).close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void loadImportDBForm(){
@@ -95,7 +121,6 @@ public class SplashScreenFormController {
 
                 new Thread(() -> {
                     try {
-
                         sleep(1000);
                         /*Database create by read*/
                         Platform.runLater(() -> {
@@ -126,9 +151,11 @@ public class SplashScreenFormController {
                             updateProgress("Obtaining a new Database connection..",0.7);
                         });
                         connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/dep8_student_attendance", "root", "mysql");
+                        DBConnection.getInstance().init(connection);
 
                         Platform.runLater(() -> {
                             updateProgress("Setting up UI",0.8);
+                            sleep(1000);
                             loadCreateAdminForm();
                         });
                     } catch (IOException | SQLException e) {
@@ -148,9 +175,8 @@ public class SplashScreenFormController {
 
     private void loadCreateAdminForm() {
         Stage stage = new Stage();
-        AnchorPane root = null;
         try {
-            root = FXMLLoader.load(this.getClass().getResource("/view/CreateAdminForm.fxml"));
+            AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/CreateAdminForm.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Student Attendance System: Create Admin");

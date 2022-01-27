@@ -2,7 +2,7 @@ package controller;
 
 import javafx.scene.control.Button;
 
-public class NormalUserInterfaceFormController {
+public class UserHomeFormController {
 
     public Button btnRecordAttendance;
     public Button btnViewReports;

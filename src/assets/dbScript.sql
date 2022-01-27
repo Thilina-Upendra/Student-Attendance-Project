@@ -15,7 +15,7 @@ CREATE TABLE user
     user_name VARCHAR(30) PRIMARY KEY,
     name      VARCHAR(100)          NOT NULL,
     password  VARCHAR(50)           NOT NULL,
-    rate      ENUM ('ADMIN','USER') NOT NULL
+    role      ENUM ('ADMIN','USER') NOT NULL
 );
 
 /*Create Student table*/
