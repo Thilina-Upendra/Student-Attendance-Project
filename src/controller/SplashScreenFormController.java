@@ -127,15 +127,13 @@ public class SplashScreenFormController {
                         });
                         connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/dep8_student_attendance", "root", "mysql");
 
-
                         Platform.runLater(() -> {
                             updateProgress("Setting up UI",0.8);
+                            loadCreateAdminForm();
                         });
                     } catch (IOException | SQLException e) {
                         e.printStackTrace();
                     }
-
-
                 }).start();
             }else{
 
@@ -143,6 +141,26 @@ public class SplashScreenFormController {
                 System.out.println("Restoring....");
             }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadCreateAdminForm() {
+        Stage stage = new Stage();
+        AnchorPane root = null;
+        try {
+            root = FXMLLoader.load(this.getClass().getResource("/view/CreateAdminForm.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Student Attendance System: Create Admin");
+            stage.setResizable(false);
+            stage.centerOnScreen();
+            stage.sizeToScene();
+            stage.show();
+
+            /* Let's close the splash screen eventually */
+            ((Stage)(lblStatus.getScene().getWindow())).close();
         } catch (IOException e) {
             e.printStackTrace();
         }

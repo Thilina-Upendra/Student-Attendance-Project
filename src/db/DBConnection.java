@@ -30,3 +30,11 @@ public class DBConnection {
         return connection;
     }
 }
+
+/*TODO:
+   First review the previous created questions
+   finalize the upto date note
+   Partially
+   => Thursday interview questions
+   => Friday interview questions
+*  */
