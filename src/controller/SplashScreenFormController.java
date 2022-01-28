@@ -70,7 +70,7 @@ public class SplashScreenFormController {
 
     private void loadLoginForm(Connection connection) {
 
-
+        DBConnection.getInstance().init(connection);
 
         try {
             Stage stage = new Stage();

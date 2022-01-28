@@ -1,6 +1,8 @@
 package controller;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 public class AdminUserFormController {
     public Button btnRecordAttendance;
@@ -11,4 +13,5 @@ public class AdminUserFormController {
     public Button btnSignOut;
 
 
+    public Label lblCurrentUser;
 }
