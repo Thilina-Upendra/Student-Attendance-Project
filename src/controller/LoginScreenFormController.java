@@ -51,7 +51,17 @@ public class LoginScreenFormController {
                     /*Load user home*/
                     path = "/view/UserHomeForm.fxml";
                 }
-                AnchorPane root = FXMLLoader.load(this.getClass().getResource(path));
+                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(path));
+                AnchorPane root = fxmlLoader.load();
+
+                if(path.equals("/view/AdminHomeForm.fxml")){
+                    AdminUserFormController adminController = fxmlLoader.getController();
+                    adminController.initUserName(resultSet.getString("name"));
+                }else {
+                    UserHomeFormController userController = fxmlLoader.getController();
+                    userController.initUserName(resultSet.getString("name"));
+                }
+
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) txtEnteredUserName.getScene().getWindow();
                 stage.setScene(scene);

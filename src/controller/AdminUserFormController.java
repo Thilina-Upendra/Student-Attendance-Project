@@ -14,4 +14,9 @@ public class AdminUserFormController {
 
 
     public Label lblCurrentUser;
+
+
+    public void initUserName(String name){
+        lblCurrentUser.setText("Welcome Admin : "+name+" !");
+    }
 }

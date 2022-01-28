@@ -32,7 +32,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Label fx:id="lblAdminName" layoutX="128.0" layoutY="59.0" text="Welcome Admin Lokka !!">
+      <Label fx:id="lblUserName" layoutX="136.0" layoutY="61.0" text="Welcome User Lokka !!">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

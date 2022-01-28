@@ -9,5 +9,9 @@ public class UserHomeFormController {
     public Button btnViewReports;
     public Button btnUserProfile;
     public Button btnSignOut;
-    public Label lblAdminName;
+    public Label lblUserName;
+
+    public void initUserName(String name){
+        lblUserName.setText("Welcome User : "+name+" !");
+    }
 }
