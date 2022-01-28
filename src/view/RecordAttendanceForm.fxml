@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="326.0" prefWidth="555.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RecordAttendanceForm">
+<AnchorPane prefHeight="517.0" prefWidth="390.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RecordAttendanceForm">
    <children>
-      <Label layoutX="158.0" layoutY="14.0" text="Record Attendance">
+      <Label layoutX="93.0" layoutY="14.0" text="Record Attendance">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="56.0" text="Student ID :">
+      <Label layoutX="18.0" layoutY="56.0" prefHeight="19.0" prefWidth="118.0" text="Student ID      :">
          <font>
             <Font size="15.0" />
          </font>
@@ -26,19 +26,19 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="16.0" layoutY="166.0" text="Last Record">
+      <Label layoutX="16.0" layoutY="359.0" text="Last Record">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
       <TextField fx:id="txtStudentId" layoutX="144.0" layoutY="53.0" prefHeight="26.0" prefWidth="220.0" />
-      <TextField fx:id="txtStudentName" layoutX="144.0" layoutY="85.0" prefHeight="26.0" prefWidth="220.0" />
-      <Button fx:id="btnIn" layoutX="148.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #2c3e50;" text="IN" textFill="WHITE" />
-      <Button fx:id="btnOut" layoutX="258.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #2c3e50;" text="OUT" textFill="WHITE" />
-      <ImageView fitHeight="159.0" fitWidth="141.0" layoutX="388.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="txtStudentName" focusTraversable="false" layoutX="144.0" layoutY="87.0" prefHeight="26.0" prefWidth="220.0" />
+      <Button fx:id="btnIn" focusTraversable="false" layoutX="145.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #2c3e50;" text="IN" textFill="WHITE" />
+      <Button fx:id="btnOut" focusTraversable="false" layoutX="258.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: #2c3e50;" text="OUT" textFill="WHITE" />
+      <ImageView fitHeight="189.0" fitWidth="220.0" layoutX="148.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/student.jpeg" />
+            <Image url="@assets/cropedQRCode.png" />
          </image></ImageView>
-      <TextArea fx:id="txtLastRecord" layoutX="144.0" layoutY="166.0" prefHeight="153.0" prefWidth="220.0" promptText="All the detials of last Entry" />
+      <TextArea fx:id="txtLastRecord" focusTraversable="false" layoutX="148.0" layoutY="359.0" prefHeight="153.0" prefWidth="209.0" promptText="All the detials of last Entry" />
    </children>
 </AnchorPane>

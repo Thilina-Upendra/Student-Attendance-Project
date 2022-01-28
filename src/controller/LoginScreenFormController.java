@@ -12,12 +12,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
+import security.Principal;
+import security.SecurityContextHolder;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class LoginScreenFormController {
     public TextField txtEnteredUserName;
@@ -37,11 +40,19 @@ public class LoginScreenFormController {
 
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement stm = connection.prepareStatement("SELECT name, role FROM user WHERE user_name=? AND password=?");
+            PreparedStatement stm = connection.prepareStatement("SELECT user_name,name, role FROM user WHERE user_name=? AND password=?");
             stm.setString(1, txtEnteredUserName.getText().trim());
             stm.setString(2, txtEnteredPassword.getText().trim());
             ResultSet resultSet = stm.executeQuery();
+
             if(resultSet.next()){
+                /*When we get the results*/
+                SecurityContextHolder.setPrincipal(new Principal(
+                        resultSet.getString("user_name"),
+                        resultSet.getString("name"),
+                        Principal.UserRole.valueOf(resultSet.getString("role"))
+                ));
+
                 String path= null;
                 /*Check on role*/
                 if(resultSet.getString("role").equals("ADMIN")){
@@ -51,16 +62,8 @@ public class LoginScreenFormController {
                     /*Load user home*/
                     path = "/view/UserHomeForm.fxml";
                 }
-                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(path));
-                AnchorPane root = fxmlLoader.load();
 
-                if(path.equals("/view/AdminHomeForm.fxml")){
-                    AdminUserFormController adminController = fxmlLoader.getController();
-                    adminController.initUserName(resultSet.getString("name"));
-                }else {
-                    UserHomeFormController userController = fxmlLoader.getController();
-                    userController.initUserName(resultSet.getString("name"));
-                }
+                AnchorPane root = FXMLLoader.load(this.getClass().getResource(path));
 
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) txtEnteredUserName.getScene().getWindow();

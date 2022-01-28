@@ -10,4 +10,8 @@ public class SecurityContextHolder {
     public static Principal getPrincipal(){
         return principal;
     }
+
+    public static void clear(){
+        principal = null;
+    }
 }

@@ -12,32 +12,32 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btnRecordAttendance" layoutX="121.0" layoutY="90.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="Record Attendance">
+      <Button fx:id="btnRecordAttendance" layoutX="121.0" layoutY="90.0" mnemonicParsing="false" onAction="#btnRecordAttendanceOnAction" prefHeight="26.0" prefWidth="157.0" text="Record Attendance">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnViewReport" layoutX="120.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="View Reports">
+      <Button fx:id="btnViewReport" layoutX="120.0" layoutY="135.0" mnemonicParsing="false" onAction="#btnViewReportOnAction" prefHeight="26.0" prefWidth="157.0" text="View Reports">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnUserProfile" layoutX="120.0" layoutY="179.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="User Profile">
+      <Button fx:id="btnUserProfile" layoutX="120.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnUserProfileOnAction" prefHeight="26.0" prefWidth="157.0" text="User Profile">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnManageUser" layoutX="120.0" layoutY="226.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="Manage User">
+      <Button fx:id="btnManageUser" layoutX="120.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnManageUserOnAction" prefHeight="26.0" prefWidth="157.0" text="Manage User">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnBackRestore" layoutX="120.0" layoutY="271.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="Backup &amp; Restore">
+      <Button fx:id="btnBackRestore" layoutX="120.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnBackRestoreOnAction" prefHeight="26.0" prefWidth="157.0" text="Backup &amp; Restore">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnSignOut" layoutX="121.0" layoutY="313.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" text="Sign Out">
+      <Button fx:id="btnSignOut" layoutX="121.0" layoutY="313.0" mnemonicParsing="false" onAction="#btnSignOutOnAction" prefHeight="26.0" prefWidth="157.0" text="Sign Out">
          <font>
             <Font size="14.0" />
          </font>

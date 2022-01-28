@@ -12,22 +12,22 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnRecordAttendance" layoutX="149.0" layoutY="109.0" mnemonicParsing="false" text="Record Attendance">
+      <Button fx:id="btnRecordAttendance" layoutX="149.0" layoutY="109.0" mnemonicParsing="false" onAction="#btnRecordAttendanceOnAction" text="Record Attendance">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnViewReports" layoutX="149.0" layoutY="158.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="155.0" text="View Reports">
+      <Button fx:id="btnViewReports" layoutX="149.0" layoutY="158.0" mnemonicParsing="false" onAction="#btnViewReportsOnAction" prefHeight="28.0" prefWidth="155.0" text="View Reports">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnUserProfile" layoutX="149.0" layoutY="209.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="155.0" text="User Profile">
+      <Button fx:id="btnUserProfile" layoutX="149.0" layoutY="209.0" mnemonicParsing="false" onAction="#btnUserProfileOnAction" prefHeight="28.0" prefWidth="155.0" text="User Profile">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnSignOut" layoutX="149.0" layoutY="255.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="155.0" text="Sign Out">
+      <Button fx:id="btnSignOut" layoutX="149.0" layoutY="255.0" mnemonicParsing="false" onAction="#btnSignOutOnAction" prefHeight="28.0" prefWidth="155.0" text="Sign Out">
          <font>
             <Font size="14.0" />
          </font>
