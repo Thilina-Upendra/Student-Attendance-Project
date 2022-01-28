@@ -47,6 +47,24 @@ public class UserHomeFormController {
     public void btnUserProfileOnAction(ActionEvent actionEvent) {
     }
 
-    public void btnSignOutOnAction(ActionEvent actionEvent) {
+    public void btnSignOutOnAction(ActionEvent actionEvent) throws IOException {
+        /*This will redirect to the Login from*/
+        /*First clear the SecurityContextHolder*/
+        SecurityContextHolder.clear();
+        AnchorPane root = FXMLLoader.load(this.getClass().getResource("/view/LoginScreenForm.fxml"));
+        Scene loginScene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(loginScene);
+        stage.setResizable(false);
+        stage.setTitle("Student Attendance System: Login");
+        stage.show();
+
+        Platform.runLater(() -> {
+            stage.sizeToScene();
+            stage.centerOnScreen();
+        });
+
+        /*Close the stage */
+        ((Stage)(btnSignOut.getScene().getWindow())).close();
     }
 }
