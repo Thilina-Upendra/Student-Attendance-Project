@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="359.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RecordAttendanceForm">
+<AnchorPane fx:id="root" prefHeight="517.0" prefWidth="359.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RecordAttendanceForm">
    <children>
       <Label layoutX="82.0" layoutY="14.0" text="Record Attendance">
          <font>
@@ -35,7 +35,7 @@
       <TextField fx:id="txtStudentName" focusTraversable="false" layoutX="144.0" layoutY="87.0" prefHeight="26.0" prefWidth="193.0" />
       <Button fx:id="btnIn" focusTraversable="false" layoutX="145.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #2c3e50;" text="IN" textFill="WHITE" />
       <Button fx:id="btnOut" focusTraversable="false" layoutX="248.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #2c3e50;" text="OUT" textFill="WHITE" />
-      <ImageView fitHeight="175.0" fitWidth="220.0" layoutX="148.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgProfile" cache="true" fitHeight="175.0" fitWidth="220.0" layoutX="148.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/cropedQRCode.png" />
          </image></ImageView>

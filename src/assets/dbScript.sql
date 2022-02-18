@@ -5,9 +5,10 @@ USE dep8_student_attendance;
 /*Create attendance table*/
 CREATE TABLE student
 (
-    id      VARCHAR(30) PRIMARY KEY,
-    name    VARCHAR(100) NOT NULL,
-    picture LONGBLOB     NOT NULL
+    id               VARCHAR(30) PRIMARY KEY,
+    name             VARCHAR(100) NOT NULL,
+    picture          LONGBLOB     NOT NULL,
+    guardian_contact VARCHAR(15)  NOT NULL
 );
 
 CREATE TABLE user
@@ -29,5 +30,15 @@ CREATE TABLE attendance
     CONSTRAINT fk_attendance_student FOREIGN KEY (student_id) REFERENCES student (id),
     CONSTRAINT fk_attendance_user FOREIGN KEY (username) REFERENCES user (user_name)
 );
+
+
+
+ALTER TABLE student DROP COLUMN guardian_contact;
+ALTER TABLE student ADD COLUMN guardian_contact VARCHAR(15) NOT NULL ;
+ALTER TABLE student ADD CONSTRAINT uk_student UNIQUE (guardian_contact);
+
+
+
+
 
 

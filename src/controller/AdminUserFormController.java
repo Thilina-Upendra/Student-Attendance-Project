@@ -22,9 +22,19 @@ public class AdminUserFormController {
 
 
     public Label lblCurrentUser;
+    public AnchorPane root;
 
     public void initialize(){
         lblCurrentUser.setText("Welcome Admin : "+ SecurityContextHolder.getPrincipal().getName()+" !");
+
+        root.setOnKeyReleased(event -> {
+            switch (event.getCode()){
+                case F1: btnRecordAttendance.fire();
+                break;
+                case F12: btnSignOut.fire();
+            }
+        });
+
     }
 
 
@@ -43,6 +53,9 @@ public class AdminUserFormController {
             stage.centerOnScreen();
             stage.sizeToScene();
         });
+
+
+
     }
 
     public void btnViewReportOnAction(ActionEvent actionEvent) {
