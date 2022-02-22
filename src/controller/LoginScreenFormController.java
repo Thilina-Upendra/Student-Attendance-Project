@@ -90,8 +90,6 @@ public class LoginScreenFormController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private boolean isValidate() {

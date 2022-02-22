@@ -23,13 +23,19 @@ CREATE TABLE user
 CREATE TABLE attendance
 (
     attendance_id INT AUTO_INCREMENT PRIMARY KEY,
-    date          DATE              NOT NULL,
+    date          DATETIME              NOT NULL,
     status        ENUM ('IN','OUT') NOT NULL,
     student_id    VARCHAR(30)       NOT NULL,
     username      VARCHAR(30)       NOT NULL,
     CONSTRAINT fk_attendance_student FOREIGN KEY (student_id) REFERENCES student (id),
     CONSTRAINT fk_attendance_user FOREIGN KEY (username) REFERENCES user (user_name)
 );
+
+/*Have to modify the date column into DATETIME*/
+ALTER TABLE attendance MODIFY COLUMN date DATETIME;
+
+/*Delete the data in the attendance table*/
+/*TRUNCATE TABLE attendance;*/
 
 
 

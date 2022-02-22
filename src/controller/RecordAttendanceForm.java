@@ -180,6 +180,7 @@ public class RecordAttendanceForm {
             }
         }catch (Throwable e){
             //TODO: Continue here
+            e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to save attendance, try again").show();
         }
     }
