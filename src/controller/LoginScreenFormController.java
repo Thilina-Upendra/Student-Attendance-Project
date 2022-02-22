@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
@@ -27,6 +28,14 @@ public class LoginScreenFormController {
     public TextField txtEnteredUserName;
     public TextField txtEnteredPassword;
     public Button btnLogin;
+
+    public void initialize(){
+        btnLogin.setOnKeyReleased(event -> {
+            if(event.getCode().equals(KeyCode.ENTER)){
+                btnLogin.fire();
+            }
+        });
+    }
 
 
     public void btnLoginOnAction(ActionEvent actionEvent) {

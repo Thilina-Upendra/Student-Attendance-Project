@@ -23,7 +23,7 @@
          </font>
       </Label>
       <Line endX="244.0" layoutX="134.0" layoutY="132.0" startX="-115.0" />
-      <VBox alignment="TOP_CENTER" layoutX="94.0" layoutY="146.0" prefHeight="137.0" prefWidth="217.0" spacing="3.0">
+      <VBox alignment="TOP_CENTER" layoutX="65.0" layoutY="143.0" prefHeight="137.0" prefWidth="302.0" spacing="3.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" text="Last Recorded Details">
                <font>
@@ -35,7 +35,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblName" text="Name : Thilina Upendra">
+            <Label fx:id="lblName" prefHeight="18.0" prefWidth="203.0" text="Name : Thilina Upendra">
                <font>
                   <Font size="14.0" />
                </font>

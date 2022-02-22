@@ -1,17 +1,21 @@
 package controller;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import db.DBConnection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import security.SecurityContextHolder;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -31,6 +35,7 @@ public class RecordAttendanceForm {
     public AnchorPane root;
     public ImageView imgProfile;
     private PreparedStatement stmSearchStudent;
+    private String studentId;
 
     public void initialize() {
         lblDateAndTime.setText(String.format("%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %1$Tp", new Date()));
@@ -101,6 +106,7 @@ public class RecordAttendanceForm {
                 imgProfile.setPreserveRatio(true);
                 btnIn.setDisable(false);
                 btnOut.setDisable(false);
+                studentId = txtStudentId.getText();
                 txtStudentId.selectAll();
                 System.out.println("Message has sent to "+rst.getString("guardian_contact"));
             } else {
@@ -119,5 +125,63 @@ public class RecordAttendanceForm {
         }
     }
 
+    public void btnIn_OnAction(ActionEvent actionEvent) {
+        recordAttendance(true);
+    }
+
+    public void btnOut_OnAction(ActionEvent actionEvent) {
+        recordAttendance(false);
+    }
+
+    private void recordAttendance(boolean in){
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        try{
+            String lastStatus = null;
+            PreparedStatement stm1 = connection.prepareStatement("SELECT status, date FROM attendance WHERE student_id=? ORDER BY date DESC LIMIT 1");
+            stm1.setString(1,studentId);
+            ResultSet rst1 = stm1.executeQuery();
+
+            if(rst1.next()){
+                lastStatus = rst1.getString("status");
+            }
+
+            if((lastStatus != null && lastStatus.equals("IN") && in)
+                || (lastStatus !=null && lastStatus.equals("OUT") && !in)){
+                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/AlertForm.fxml"));
+                AnchorPane root = fxmlLoader.load();
+                AlertFormController controller = fxmlLoader.getController();
+                controller.initData(studentId,txtStudentName.getText(),
+                        rst1.getTimestamp("date").toLocalDateTime(), in);
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Alert! Horek");
+                stage.sizeToScene();
+                stage.centerOnScreen();
+                stage.showAndWait();
+
+
+                /*------------------------*/
+
+            } else{
+                /*Here can save the attendance in the attendance table*/
+                PreparedStatement stm2 = connection.prepareStatement("INSERT INTO attendance (date, status, student_id, username)  VALUES (NOW(), ?,?,?)");
+                stm2.setString(1, in ? "IN" : "OUT");
+                stm2.setString(2, studentId);
+                stm2.setString(3, SecurityContextHolder.getPrincipal().getUserName());
+                int rst2 = stm2.executeUpdate();
+                if(rst2 != 1){
+                    throw new RuntimeException("Failed to add the attendance.");
+                }
+
+                txtStudentId.clear();
+                txtStudentIdOnAction(null);
+            }
+        }catch (Throwable e){
+            //TODO: Continue here
+            new Alert(Alert.AlertType.ERROR, "Failed to save attendance, try again").show();
+        }
+    }
 }
 

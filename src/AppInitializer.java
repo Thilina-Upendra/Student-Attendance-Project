@@ -35,3 +35,14 @@ public class AppInitializer extends Application {
         primaryStage.show();
     }
 }
+
+/*TODO: Pass data to the alert class
+*  Implement audio file to the Alert
+*  Change the date in db in attendance
+*  Homework
+*  Note
+* */
+
+/*
+* FX Media player is advance
+* */

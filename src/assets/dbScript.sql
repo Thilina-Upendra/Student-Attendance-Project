@@ -38,6 +38,10 @@ ALTER TABLE student ADD COLUMN guardian_contact VARCHAR(15) NOT NULL ;
 ALTER TABLE student ADD CONSTRAINT uk_student UNIQUE (guardian_contact);
 
 
+SELECT * FROM attendance;
+SELECT status FROM attendance WHERE student_id='2021/DEP08/1001' ORDER BY date DESC LIMIT 1;
+
+
 
 
 
