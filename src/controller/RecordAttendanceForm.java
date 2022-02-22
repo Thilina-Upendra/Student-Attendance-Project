@@ -6,6 +6,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -36,6 +37,7 @@ public class RecordAttendanceForm {
     public ImageView imgProfile;
     private PreparedStatement stmSearchStudent;
     private String studentId;
+    private SimpleObjectProperty<String> stringSimpleObjectProperty = new SimpleObjectProperty();
 
     public void initialize() {
         lblDateAndTime.setText(String.format("%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %1$Tp", new Date()));
@@ -153,6 +155,7 @@ public class RecordAttendanceForm {
                 AlertFormController controller = fxmlLoader.getController();
                 controller.initData(studentId,txtStudentName.getText(),
                         rst1.getTimestamp("date").toLocalDateTime(), in);
+                controller.initStringProperty(stringSimpleObjectProperty);
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -161,28 +164,39 @@ public class RecordAttendanceForm {
                 stage.centerOnScreen();
                 stage.showAndWait();
 
-
+                if(stringSimpleObjectProperty.getValue() == null){
+                    txtStudentId.clear();
+                    txtStudentIdOnAction(null);
+                }else if(stringSimpleObjectProperty.getValue().equals("Proceed")){
+                    saveTheStudent(connection,in);
+                    stringSimpleObjectProperty.setValue("Initial");
+                }else{
+                    System.out.println("Have to call to the police...");
+                }
                 /*------------------------*/
 
             } else{
-                /*Here can save the attendance in the attendance table*/
-                PreparedStatement stm2 = connection.prepareStatement("INSERT INTO attendance (date, status, student_id, username)  VALUES (NOW(), ?,?,?)");
-                stm2.setString(1, in ? "IN" : "OUT");
-                stm2.setString(2, studentId);
-                stm2.setString(3, SecurityContextHolder.getPrincipal().getUserName());
-                int rst2 = stm2.executeUpdate();
-                if(rst2 != 1){
-                    throw new RuntimeException("Failed to add the attendance.");
-                }
-
-                txtStudentId.clear();
-                txtStudentIdOnAction(null);
+                saveTheStudent(connection, in);
             }
         }catch (Throwable e){
             //TODO: Continue here
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to save attendance, try again").show();
         }
+    }
+
+    private void saveTheStudent(Connection connection, boolean in) throws Throwable {
+        /*Here can save the attendance in the attendance table*/
+        PreparedStatement stm2 = connection.prepareStatement("INSERT INTO attendance (date, status, student_id, username)  VALUES (NOW(), ?,?,?)");
+        stm2.setString(1, in ? "IN" : "OUT");
+        stm2.setString(2, studentId);
+        stm2.setString(3, SecurityContextHolder.getPrincipal().getUserName());
+        int rst2 = stm2.executeUpdate();
+        if(rst2 != 1){
+            throw new RuntimeException("Failed to add the attendance.");
+        }
+        txtStudentId.clear();
+        txtStudentIdOnAction(null);
     }
 }
 

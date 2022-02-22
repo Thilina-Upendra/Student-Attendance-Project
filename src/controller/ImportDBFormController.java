@@ -52,7 +52,4 @@ public class ImportDBFormController {
         }
         ((Stage)(btnOkay.getScene().getWindow())).close();
     }
-
-    public void rdo(ActionEvent actionEvent) {
-    }
 }

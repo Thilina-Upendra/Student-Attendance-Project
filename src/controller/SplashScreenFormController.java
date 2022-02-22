@@ -51,6 +51,27 @@ public class SplashScreenFormController {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/dep8_student_attendance", "root", "mysql");
 
+                sleep(1000);
+                Platform.runLater(() -> {
+                    updateProgress("First step of Establishing..",0.3);
+                });
+
+                sleep(1000);
+                Platform.runLater(() -> {
+                    updateProgress("Second step of Establishing..",0.6);
+                });
+
+                sleep(1000);
+                Platform.runLater(() -> {
+                    updateProgress("Third step of Establishing..",0.9);
+                });
+                sleep(1000);
+
+                Platform.runLater(() -> {
+                    updateProgress("Final step of Establishing..",1.0);
+                });
+                sleep(1000);
+
                 /*If we get the connection successfully load the login form*/
                 Platform.runLater(()->{
                     loadLoginForm(connection);

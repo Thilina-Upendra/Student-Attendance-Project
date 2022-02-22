@@ -52,8 +52,8 @@
             </Label>
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="127.0" text="Proceed" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" text="Call Police" />
+                  <Button fx:id="btnProceed" mnemonicParsing="false" onAction="#btnProceedOnAction" prefHeight="26.0" prefWidth="127.0" text="Proceed" />
+                  <Button fx:id="btnCallPolice" mnemonicParsing="false" onAction="#btnCallPoliceOnAction" prefHeight="26.0" prefWidth="134.0" text="Call Police" />
                </children>
             </HBox>
          </children>
