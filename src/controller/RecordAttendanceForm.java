@@ -18,11 +18,13 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import security.SecurityContextHolder;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class RecordAttendanceForm {
@@ -35,6 +37,9 @@ public class RecordAttendanceForm {
     public Label lblDateAndTime;
     public AnchorPane root;
     public ImageView imgProfile;
+    public Label lblId;
+    public Label lblName;
+    public Label lblDate;
     private PreparedStatement stmSearchStudent;
     private String studentId;
     private SimpleObjectProperty<String> stringSimpleObjectProperty = new SimpleObjectProperty();
@@ -65,6 +70,7 @@ public class RecordAttendanceForm {
         Connection connection = DBConnection.getInstance().getConnection();
         try {
             stmSearchStudent = connection.prepareStatement("SELECT * FROM student WHERE id=?");
+
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Failed to connect with DB", ButtonType.OK).showAndWait();
             e.printStackTrace();
@@ -84,6 +90,25 @@ public class RecordAttendanceForm {
             }
         });
 
+        displayLatestRecord();
+    }
+
+    private void displayLatestRecord(){
+        Connection connection = DBConnection.getInstance().getConnection();
+        try{
+            PreparedStatement beforeSelectStm = connection.prepareStatement("SELECT attendance.student_id, attendance.date, attendance.status, student.name FROM attendance\n" +
+                    "    INNER JOIN student ON attendance.student_id = student.id ORDER BY date DESC LIMIT 1;");
+            ResultSet rst = beforeSelectStm.executeQuery();
+            if(rst.next()){
+                lblId.setText("ID : "+rst.getString("student_id"));
+                lblName.setText("Name : "+rst.getString("name"));
+                lblDate.setText( rst.getTimestamp("date").toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a")) + " - " + (rst.getString("status").equals("IN")? "IN" : "OUT"));
+            }else{
+
+            }
+        }catch (Throwable e){
+            e.printStackTrace();
+        }
     }
 
     public void txtStudentIdOnAction(ActionEvent actionEvent) {
@@ -110,7 +135,6 @@ public class RecordAttendanceForm {
                 btnOut.setDisable(false);
                 studentId = txtStudentId.getText();
                 txtStudentId.selectAll();
-                System.out.println("Message has sent to "+rst.getString("guardian_contact"));
             } else {
                 //new DepAlert(Alert.AlertType.ERROR, "Invalid Student ID, Try again!", "Oops!", "Error").show();
                 new Alert(Alert.AlertType.ERROR, "Invalid Student ID, Try again", ButtonType.OK).show();
@@ -124,6 +148,36 @@ public class RecordAttendanceForm {
             new Alert(Alert.AlertType.ERROR, "Something went wrong. Please try again", ButtonType.OK).show();
             txtStudentId.selectAll();
             txtStudentId.requestFocus();
+        }
+    }
+
+    private class Student{
+        private String id;
+        private String name;
+        private String guardianContact;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getGuardianContact() {
+            return guardianContact;
+        }
+
+        public void setGuardianContact(String guardianContact) {
+            this.guardianContact = guardianContact;
         }
     }
 
@@ -155,6 +209,7 @@ public class RecordAttendanceForm {
                 AlertFormController controller = fxmlLoader.getController();
                 controller.initData(studentId,txtStudentName.getText(),
                         rst1.getTimestamp("date").toLocalDateTime(), in);
+                /*==============*/
                 controller.initStringProperty(stringSimpleObjectProperty);
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -173,8 +228,6 @@ public class RecordAttendanceForm {
                 }else{
                     System.out.println("Have to call to the police...");
                 }
-                /*------------------------*/
-
             } else{
                 saveTheStudent(connection, in);
             }
@@ -195,8 +248,11 @@ public class RecordAttendanceForm {
         if(rst2 != 1){
             throw new RuntimeException("Failed to add the attendance.");
         }
+
+        /*Wr should call the sms sender method*/
         txtStudentId.clear();
         txtStudentIdOnAction(null);
+        displayLatestRecord();
     }
 }
 

@@ -1,6 +1,5 @@
 package controller;
 
-
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -8,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
 
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
@@ -24,6 +22,10 @@ public class AlertFormController {
     private SimpleObjectProperty<String> stringSimpleObjectProperty;
 
     public void initialize() throws URISyntaxException {
+        playSiren();
+    }
+
+    private void playSiren() throws URISyntaxException {
         Media media = new Media(this.getClass().getResource("/assets/sirenSound2.wav").toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
         player.setCycleCount(2);

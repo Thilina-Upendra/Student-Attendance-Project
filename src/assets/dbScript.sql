@@ -47,6 +47,8 @@ ALTER TABLE student ADD CONSTRAINT uk_student UNIQUE (guardian_contact);
 SELECT * FROM attendance;
 SELECT status FROM attendance WHERE student_id='2021/DEP08/1001' ORDER BY date DESC LIMIT 1;
 
+SELECT attendance.student_id, attendance.date, attendance.status, student.name FROM attendance
+    INNER JOIN student ON attendance.student_id = student.id ORDER BY date DESC LIMIT 1;
 
 
 
