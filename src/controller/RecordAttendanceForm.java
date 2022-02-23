@@ -20,10 +20,17 @@ import security.SecurityContextHolder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -41,7 +48,7 @@ public class RecordAttendanceForm {
     public Label lblName;
     public Label lblDate;
     private PreparedStatement stmSearchStudent;
-    private String studentId;
+    private Student student;
     private SimpleObjectProperty<String> stringSimpleObjectProperty = new SimpleObjectProperty();
 
     public void initialize() {
@@ -133,7 +140,7 @@ public class RecordAttendanceForm {
                 imgProfile.setPreserveRatio(true);
                 btnIn.setDisable(false);
                 btnOut.setDisable(false);
-                studentId = txtStudentId.getText();
+                student = new Student(rst.getString("id"),rst.getString("name"),rst.getString("guardian_contact"));
                 txtStudentId.selectAll();
             } else {
                 //new DepAlert(Alert.AlertType.ERROR, "Invalid Student ID, Try again!", "Oops!", "Error").show();
@@ -151,32 +158,14 @@ public class RecordAttendanceForm {
         }
     }
 
-    private class Student{
+    private static class Student{
         private String id;
         private String name;
         private String guardianContact;
 
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
+        public Student(String id, String name, String guardianContact) {
             this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
             this.name = name;
-        }
-
-        public String getGuardianContact() {
-            return guardianContact;
-        }
-
-        public void setGuardianContact(String guardianContact) {
             this.guardianContact = guardianContact;
         }
     }
@@ -195,7 +184,7 @@ public class RecordAttendanceForm {
         try{
             String lastStatus = null;
             PreparedStatement stm1 = connection.prepareStatement("SELECT status, date FROM attendance WHERE student_id=? ORDER BY date DESC LIMIT 1");
-            stm1.setString(1,studentId);
+            stm1.setString(1,student.id);
             ResultSet rst1 = stm1.executeQuery();
 
             if(rst1.next()){
@@ -207,7 +196,7 @@ public class RecordAttendanceForm {
                 FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/AlertForm.fxml"));
                 AnchorPane root = fxmlLoader.load();
                 AlertFormController controller = fxmlLoader.getController();
-                controller.initData(studentId,txtStudentName.getText(),
+                controller.initData(student.id,txtStudentName.getText(),
                         rst1.getTimestamp("date").toLocalDateTime(), in);
                 /*==============*/
                 controller.initStringProperty(stringSimpleObjectProperty);
@@ -242,7 +231,7 @@ public class RecordAttendanceForm {
         /*Here can save the attendance in the attendance table*/
         PreparedStatement stm2 = connection.prepareStatement("INSERT INTO attendance (date, status, student_id, username)  VALUES (NOW(), ?,?,?)");
         stm2.setString(1, in ? "IN" : "OUT");
-        stm2.setString(2, studentId);
+        stm2.setString(2, student.id);
         stm2.setString(3, SecurityContextHolder.getPrincipal().getUserName());
         int rst2 = stm2.executeUpdate();
         if(rst2 != 1){
@@ -250,9 +239,39 @@ public class RecordAttendanceForm {
         }
 
         /*Wr should call the sms sender method*/
+        sendSMS(in);
+
         txtStudentId.clear();
         txtStudentIdOnAction(null);
         displayLatestRecord();
+    }
+    private void sendSMS(boolean in){
+
+        try{
+            URL url = new URL("https://api.smshub.lk/api/v2/send/single");
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type","application/json");
+            connection.setRequestProperty("???","Token");
+
+            String payLoad = String.format("{\n" +
+                            "  \"message\": \"%s\",\n" +
+                            "  \"phoneNumber\": \"%s\"\n" +
+                    "}",
+                    student.name+" has "+(in?" entered to " : " exited from ")+" IJSE at : "+ LocalDateTime.now(),
+                    student.guardianContact);
+
+            connection.setDoOutput(true);
+            OutputStream os = connection.getOutputStream();
+            os.write(payLoad.getBytes());
+            os.close();
+
+            /*Get only the Response code*/
+            System.out.println(connection.getResponseCode());
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }
 
