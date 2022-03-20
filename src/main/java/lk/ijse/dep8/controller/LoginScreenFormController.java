@@ -1,6 +1,6 @@
-package controller;
+package lk.ijse.dep8.controller;
 
-import db.DBConnection;
+import lk.ijse.dep8.db.DBConnection;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -9,20 +9,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
-import security.Principal;
-import security.SecurityContextHolder;
+import lk.ijse.dep8.security.Principal;
+import lk.ijse.dep8.security.SecurityContextHolder;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class LoginScreenFormController {
     public TextField txtEnteredUserName;

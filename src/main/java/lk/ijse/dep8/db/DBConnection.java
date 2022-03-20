@@ -1,4 +1,4 @@
-package db;
+package lk.ijse.dep8.db;
 
 import java.sql.Connection;
 

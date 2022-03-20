@@ -1,6 +1,6 @@
-package controller;
+package lk.ijse.dep8.controller;
 
-import db.DBConnection;
+import lk.ijse.dep8.db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -117,7 +117,7 @@ public class SplashScreenFormController {
         try {
 
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/ImportDBForm.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("../../resources/view/ImportDBForm.fxml"));
             AnchorPane root = fxmlLoader.load();
             ImportDBFormController controller = fxmlLoader.getController();
             controller.initFileProperty(fileProperty);

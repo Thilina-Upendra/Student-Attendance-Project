@@ -1,4 +1,4 @@
-package security;
+package lk.ijse.dep8.security;
 
 public class SecurityContextHolder {
     private static Principal principal;

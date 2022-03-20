@@ -1,4 +1,4 @@
-package security;
+package lk.ijse.dep8.security;
 
 public class Principal {
     private String userName;

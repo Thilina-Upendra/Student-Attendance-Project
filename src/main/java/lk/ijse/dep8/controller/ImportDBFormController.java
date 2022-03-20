@@ -1,4 +1,4 @@
-package controller;
+package lk.ijse.dep8.controller;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;

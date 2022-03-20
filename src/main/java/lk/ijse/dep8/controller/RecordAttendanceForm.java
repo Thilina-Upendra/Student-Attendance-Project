@@ -1,7 +1,6 @@
-package controller;
+package lk.ijse.dep8.controller;
 
-import com.sun.xml.internal.bind.v2.TODO;
-import db.DBConnection;
+import lk.ijse.dep8.db.DBConnection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,16 +15,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import security.SecurityContextHolder;
+import lk.ijse.dep8.security.SecurityContextHolder;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

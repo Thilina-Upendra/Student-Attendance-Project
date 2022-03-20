@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="348.0" prefWidth="459.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SplashScreenFormController">
+<AnchorPane prefHeight="348.0" prefWidth="459.0" style="-fx-background-color: #bdc3c7;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.dep8.controller.SplashScreenFormController">
    <children>
       <ProgressBar fx:id="pgb" layoutX="114.0" layoutY="280.0" prefHeight="20.0" prefWidth="232.0" progress="0.0" />
       <Label fx:id="lblStatus" alignment="CENTER" layoutX="114.0" layoutY="248.0" prefHeight="16.0" prefWidth="232.0" text="Splash description">

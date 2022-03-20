@@ -26,3 +26,10 @@ replay_pid*
 /out/
 *.iml
 *.idea
+
+**/target/
+**/out/
+**/.idea/
+**/lib/
+
+**/*.iml

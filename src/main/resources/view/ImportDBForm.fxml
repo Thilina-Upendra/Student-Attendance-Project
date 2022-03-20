@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="237.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ImportDBFormController">
+<AnchorPane prefHeight="237.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.dep8.controller.ImportDBFormController">
    <children>
       <Label layoutX="14.0" layoutY="32.0" prefHeight="25.0" prefWidth="233.0" text="Restore previous database backups" />
       <Label layoutX="14.0" layoutY="9.0" prefHeight="25.0" prefWidth="561.0" text="Hey there! It seems like this is the first tim eboot of Student Attendance System" />

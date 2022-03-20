@@ -1,4 +1,4 @@
-package controller;
+package lk.ijse.dep8.controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import security.SecurityContextHolder;
+import lk.ijse.dep8.security.SecurityContextHolder;
 
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
-package controller;
+package lk.ijse.dep8.controller;
 
-import db.DBConnection;
+import lk.ijse.dep8.db.DBConnection;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
