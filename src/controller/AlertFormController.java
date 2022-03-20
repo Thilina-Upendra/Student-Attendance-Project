@@ -50,4 +50,8 @@ public class AlertFormController {
     public void btnCallPoliceOnAction(ActionEvent actionEvent) {
 
     }
+
+    public void testing(boolean have){
+
+    }
 }
